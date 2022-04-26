@@ -15,7 +15,9 @@ if bool == 1
     delete *.tex
 
     delete graphs/vs_control/*.png
-    delete graphs/vs_initial_modes/*.png
+    delete graphs/vs_control_std/*.png
+    delete graphs/vs_initial_values/*.png
+    delete graphs/vs_initial_values_std/*.png
 
     delete testing_calibrations/Output/*.mat
     delete usmodel/Output/*.mat
