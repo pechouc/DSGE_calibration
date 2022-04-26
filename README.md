@@ -20,7 +20,9 @@ Alternatively, you can download the code as a zipped folder as on the following 
 
 <img src="assets/screenshot_README.png" width="600"/>
 
-You can then open the relevant working directory in Matlab. The sub-section below describes the broad organisation of the code.
+You can then open the relevant working directory in Matlab. 
+
+The sub-section below describes the broad organisation of the code.
 
 ## Description of the scripts
 
