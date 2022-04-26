@@ -18,7 +18,7 @@ git clone git@github.com:pechouc/DSGE_calibration.git
 
 Alternatively, you can download the code as a zipped folder as on the following illustration:
 
-![Capture d’écran 2022-04-26 à 23 13 43](https://user-images.githubusercontent.com/63041127/165393430-5ecbe294-4540-452f-992a-3d94414f8e26.png)
+<img src="assets/screenshot_README.png" width="600"/>
 
 You can then open the relevant working directory in Matlab. The sub-section below describes the broad organisation of the code.
 
