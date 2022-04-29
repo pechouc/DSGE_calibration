@@ -233,7 +233,7 @@ barh(categorical(initial_estimates.param_name_tex), [initial_estimates.percentag
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 title(['Estimation bias using the control model '], 'Interpreter','latex');
-xlabel('in % of the true value ');
+xlabel('in \% of the true value ', 'Interpreter', 'latex');
 if center_graphs == 1
     set(gca, 'XLim', [-65, 65], 'XTick', -65:5:65);
 end
@@ -248,7 +248,7 @@ barh(categorical(initial_estimates.param_name_tex), [initial_estimates.std_devia
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
 title(['Estimation bias using the control model '], 'Interpreter','latex');
-xlabel(['in standard deviation of the estimate']);
+xlabel('in standard deviations of the estimate', 'Interpreter', 'latex');
 if center_graphs == 1
     set(gca, 'XLim', [-2.5, 2.5], 'XTick', -2.5:0.5:2.5);
 end
