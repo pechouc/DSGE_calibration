@@ -18,15 +18,15 @@ The logic described in the methodological section of our report can be run as a 
 
 ## `generate_dataset.m`
 
-The main Matlab script first runs **`generate_dataset.m`**. 
+The main Matlab script first runs **`generate_dataset.m`**.
 
-This script relies on the Dynare instructions in **`usmodel.mod`** to (i) estimate the Smets & Wouters (2007) model on historical US data (following the replication code and data file released by the authors) and (ii) generate 100 simulated datasets that contain the 7 observed variables. These are saved as `.mat` files in the process. Additionally, `generate_dataset.m` saves the posterior modes and / or means of the estimated parameters (as well as their standard deviations) in an Excel file. 
+This script relies on the Dynare instructions in **`usmodel.mod`** to (i) estimate the Smets & Wouters (2007) model on historical US data (following the replication code and data file released by the authors) and (ii) generate 100 simulated datasets that contain the 7 observed variables. These are saved as `.mat` files in the process. Additionally, `generate_dataset.m` saves the posterior modes and / or means of the estimated parameters (as well as their standard deviations) in an Excel file.
 
 `generate_dataset.m` can be run in a standalone fashion and will by default operate the estimation with maximum likelihood. `usmodel.mod` can also be used as such with the `dynare` command: here too, by default, the estimation will be run with maximum likelihood. In both cases, one can operate the Metropolis-Hastings by entering `estimation_method_short = 'MH'` in the Matlab command line before running `run generate_dataset.m` or `dynare usmodel.mod`.
 
 ## `calibration_errors_estimation.m`
 
-In `main.m`, the script `calibration_errors_estimation.m` is then run. 
+In `main.m`, the script `calibration_errors_estimation.m` is then run.
 
 This script iterates over the 5 fixed parameters in Smets & Wouters (2007). For each of them, an X% increase and and X% decrease of the value initially set are successively considered. At each of the 10 resulting iterations, the Dynare script **`testing_calibrations.mod`** is called. This Dynare script again defines the model of Smets & Wouters but using the modified values for the fixed parameters. Iterating over the simulated datasets, it estimates the model over each of them and saves the resulting modes or means (depending on the estimation method selected) in a table. After **`testing_calibrations.mod`** has run, the table with the results from the successive estimations is saved in an Excel file, under the relevant tab.
 
@@ -36,9 +36,9 @@ Note that, before estimating the different models with calibration errors, a "co
 
 ## `build_graphs.m`
 
-Eventually, the `build_graphs.m` script is called. 
+Eventually, the `build_graphs.m` script is called.
 
-Based on the Excel files generated in the previous steps of the code, this script creates the graphs that we present in our report. These graphs are of five different types. First, for each of the fixed parameters that are modified to account for "calibration errors", they compare: 
+Based on the Excel files generated in the previous steps of the code, this script creates the graphs that we present in our report. These graphs are of five different types. First, for each of the fixed parameters that are modified to account for "calibration errors", they compare:
 
 - the average modes or means of the estimated parameters with the values behind the data-generating process, the difference being expressed in percentage f the values initially estimated;
 - the average modes or means of the estimated parameters with the values behind the data-generating process, the difference being expressed in the standard deviations estimated initially on historical data;
