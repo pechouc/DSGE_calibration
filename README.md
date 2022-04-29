@@ -26,4 +26,4 @@ The sub-section below describes the broad organisation of the code.
 
 ## Description of the scripts
 
-The code in this repository is split across different Matlab (`.m` files) and Dynare (`.mod` files) scripts. The structure of the code and the arguments required to run each of the scripts are described here (**LINK TO BE ADDED**). Comments in the code also document its logic.
+The code in this repository is split across different Matlab (`.m` files) and Dynare (`.mod` files) scripts. The structure of the code and the arguments required to run each of the scripts are described [here](https://github.com/pechouc/DSGE_calibration/blob/main/docs/code_description.md). Comments in the code also document its logic.
