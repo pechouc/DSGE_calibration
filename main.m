@@ -11,6 +11,9 @@ estimation_method_short = input(prompt);
 prompt = "Choose the magnitude of the percentage change (like 0.01 for 1% changes):";
 percentage_change_magnitude = input(prompt);
 
+prompt = "Do you want to center the x-axis of the graphs with pre-defined bounds? (answer by 0 or 1)";
+center_graphs = input(prompt);
+
 % Estimating the original model on US data and generating 100 simulated datasets
 run generate_dataset.m
 

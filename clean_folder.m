@@ -18,6 +18,7 @@ if bool == 1
     delete graphs/vs_control_std/*.png
     delete graphs/vs_initial_values/*.png
     delete graphs/vs_initial_values_std/*.png
+    delete graphs/control_vs_initial/*.png
 
     delete testing_calibrations/Output/*.mat
     delete usmodel/Output/*.mat

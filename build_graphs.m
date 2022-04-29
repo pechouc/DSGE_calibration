@@ -26,6 +26,11 @@ end
 legend_increase = [num2str(percentage_change_magnitude * 100), '\% increase'];
 legend_decrease = [num2str(percentage_change_magnitude * 100), '\% decrease'];
 
+if exist("center_graphs") == 0
+    prompt = "Do you want to center the x-axis of the graphs with pre-defined bounds? (answer by 0 or 1)";
+    center_graphs = input(prompt);
+end
+
 % --- First, plotting the comparison with the data-generating parameters
 
 % We read the Excel file that stores the posterior values obtained from the initial estimation
@@ -94,6 +99,9 @@ for param_num = 1:length(params_to_recalibrate)
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
     xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (\%)'], 'Interpreter','latex');
+    if center_graphs == 1
+        set(gca, 'XLim', [-70, 70], 'XTick', -70:10:70);
+    end
 
     % Saving the graph
     saveas(gcf, ['graphs/vs_initial_values/', recalibrated_param, '.png'])
@@ -110,6 +118,9 @@ for param_num = 1:length(params_to_recalibrate)
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
     xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (expressed in standard deviations)'], 'Interpreter','latex');
+    if center_graphs == 1
+        set(gca, 'XLim', [-2.5, 2.5], 'XTick', -2.5:0.5:2.5);
+    end
 
     % Saving the graph
     saveas(gcf, ['graphs/vs_initial_values_std/', recalibrated_param, '.png'])
@@ -168,6 +179,9 @@ for param_num = 1:length(params_to_recalibrate)
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'Interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
     xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (\%)'], 'Interpreter','latex');
+    if center_graphs == 1
+        set(gca, 'XLim', [-1.5, 1.5], 'XTick', -1.5:0.5:1.5);
+    end
 
     saveas(gcf, ['graphs/vs_control/', recalibrated_param, '.png'])
 
@@ -183,8 +197,62 @@ for param_num = 1:length(params_to_recalibrate)
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'Interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
     xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (expressed in standard deviations)'], 'Interpreter','latex');
-
+    if center_graphs == 1
+        set(gca, 'XLim', [-0.05, 0.05], 'XTick', -0.05:0.01:0.05);
+    end
+    
     % Saving the graph
     saveas(gcf, ['graphs/vs_control_std/', recalibrated_param, '.png'])
 
 end
+
+
+% --- Third, plotting the differences between the control and the data-generating parameters
+initial_estimates = readtable(initial_file_name);
+
+mask = cellfun(@(x) contains(x, '{'), initial_estimates.param_name_tex);
+temp = initial_estimates.param_name_tex;
+temp(mask) = cellfun(@(x) ['$', x(2:length(x) - 1), '$'], initial_estimates.param_name_tex(mask), 'UniformOutput', false);
+temp(~mask) = cellfun(@(x) ['$', x, '$'], initial_estimates.param_name_tex(~mask), 'UniformOutput', false);
+temp = cellfun(@(x) char(x), temp, 'UniformOutput', false);
+initial_estimates.param_name_tex = temp;
+
+control_estimates = readtable(output_file_name, 'Sheet', 'control');
+control_estimates = control_estimates(:, {'param_name', 'average'});
+control_estimates.Properties.VariableNames = {'param_name' 'average_control'};
+
+initial_estimates = join(initial_estimates, control_estimates);
+initial_estimates = initial_estimates(:, {'param_name', 'param_name_tex', 'average_control', relevant_column_name, std_column_name});
+initial_estimates.Properties.VariableNames = {'param_name' 'param_name_tex' 'average_control' 'true_value' 'std'};
+
+initial_estimates.diff = initial_estimates.average_control - initial_estimates.true_value;
+initial_estimates.percentage_change = (initial_estimates.diff ./ initial_estimates.true_value) * 100;
+
+barh(categorical(initial_estimates.param_name_tex), [initial_estimates.percentage_change]);
+
+ax = gca;
+ax.TickLabelInterpreter = 'latex';
+title(['Estimation bias using the control model '], 'Interpreter','latex');
+xlabel('in % of the true value ');
+if center_graphs == 1
+    set(gca, 'XLim', [-65, 65], 'XTick', -65:5:65);
+end
+
+saveas(gcf, ['graphs/control_vs_initial/', 'control_vs_initial.png'])
+
+% We do the same with standard deviations as denominator
+initial_estimates.std_deviation_change = (initial_estimates.diff ./ initial_estimates.std);
+
+barh(categorical(initial_estimates.param_name_tex), [initial_estimates.std_deviation_change]);
+
+ax = gca;
+ax.TickLabelInterpreter = 'latex';
+title(['Estimation bias using the control model '], 'Interpreter','latex');
+xlabel(['in standard deviation of the estimate']);
+if center_graphs == 1
+    set(gca, 'XLim', [-2.5, 2.5], 'XTick', -2.5:0.5:2.5);
+end
+
+% Saving the graph
+saveas(gcf, ['graphs/control_vs_initial/', 'control_vs_initial_std.png'])
+

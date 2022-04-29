@@ -177,7 +177,7 @@ calfa,0.24,0.01,1.0,NORMAL_PDF,0.3,0.05;
 end;
 
 
-
+/*
 estimated_params_init;
 stderr ea,0.4618;
 stderr eb,0.1818513;
@@ -216,6 +216,7 @@ ctrend,0.3982;
 cgy,0.05;
 calfa,0.24;
 end;
+*/
 
 varobs dy dc dinve labobs pinfobs dw robs;
 
