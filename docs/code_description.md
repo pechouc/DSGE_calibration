@@ -14,7 +14,9 @@ The logic described in the methodological section of our report can be run as a 
 
 - Fourth, when defining `center_graphs` in response to the fourth prompt, you choose whether to center the x-axis of the graphs eventually produced around 0, with bounds and ticks fixed in the `build_graphs.m` script. These bounds have been defined in the script to fit the case of 1% changes in the values of the fixed paramaters, with estimation by maximum likelihood. If you do not know the scale to expect, we recommend that you select `0`.
 
-# `generate_dataset.m`
+# Other scripts
+
+## `generate_dataset.m`
 
 The main Matlab script first runs **`generate_dataset.m`**. 
 
@@ -22,7 +24,7 @@ This script relies on the Dynare instructions in **`usmodel.mod`** to (i) estima
 
 `generate_dataset.m` can be run in a standalone fashion and will by default operate the estimation with maximum likelihood. `usmodel.mod` can also be used as such with the `dynare` command: here too, by default, the estimation will be run with maximum likelihood. In both cases, one can operate the Metropolis-Hastings by entering `estimation_method_short = 'MH'` in the Matlab command line before running `run generate_dataset.m` or `dynare usmodel.mod`.
 
-# `calibration_errors_estimation.m`
+## `calibration_errors_estimation.m`
 
 In `main.m`, the script `calibration_errors_estimation.m` is then run. 
 
@@ -32,7 +34,7 @@ Note that, before estimating the different models with calibration errors, a "co
 
 `calibration_errors_estimation.m` can be run in a standalone fashion if simulated datasets have been previously generated. By default, the estimation will be operated via maximum likelihood, over 5 simulated datasets for each set of calibrations and considering 1% deviations from initial values. Each of these options can be modified by respectively defining variables `estimation_method_short`, `I` and / or `percentage_change_magnitude` before running `run calibration_errors_estimation.m`. If a calibration is defined before as in the Matlab script, `testing_calibrations.mod` can run on its own too, although use cases should be limited.
 
-# `build_graphs.m`
+## `build_graphs.m`
 
 Eventually, the `build_graphs.m` script is called. 
 
@@ -49,6 +51,6 @@ Note that if `center_graphs = 1` was selected, the x-axis is centered around 0 f
 
 If relevant Excel files are stored in the root folder, the `build_graphs.m` script can run in a standalone fashion. It will prompt three successive messages for the user to indicate the estimation method and the magnitude of the percentage changes that were selected to generate the Excel outputs, as well as whether to center the x-axis of the graphs or not.
 
-# `clean_folder.m`
+## `clean_folder.m`
 
 Running the **`clean_folder.m`** script allows to clean the working folder. Outputs (graphs and Excel files essentially) are only eliminated if this is explicitly chosen by the user in response to a prompted message.
