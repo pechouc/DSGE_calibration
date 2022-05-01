@@ -46,7 +46,7 @@ initial_estimates.param_name_tex = temp;
 
 % We iterate over the 5 parameters that we "recalibrate"
 params_to_recalibrate = {'ctou', 'clandaw', 'cg', 'curvp', 'curvw'};
-params_to_recalibrate_tex = {'$\delta$', '$\lambda_w$', '$\frac{\bar g}{\bar y}$', '$\varepsilon_p$', '$\varepsilon_w$'};
+params_to_recalibrate_tex = {'$\delta$', '$\lambda_w$', '$g_y$', '$\varepsilon_p$', '$\varepsilon_w$'};
 
 for param_num = 1:length(params_to_recalibrate)
     recalibrated_param = params_to_recalibrate{param_num};
@@ -98,7 +98,7 @@ for param_num = 1:length(params_to_recalibrate)
     ax.TickLabelInterpreter = 'latex';
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
-    xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (\%)'], 'Interpreter','latex');
+    xlabel(['in \% of the estimated ', relevant_column_name, ' in the initial estimation'], 'Interpreter','latex');
     if center_graphs == 1
         set(gca, 'XLim', [-70, 70], 'XTick', -70:10:70);
     end
@@ -117,7 +117,7 @@ for param_num = 1:length(params_to_recalibrate)
     ax.TickLabelInterpreter = 'latex';
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
-    xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (expressed in standard deviations)'], 'Interpreter','latex');
+    xlabel(['in standard deviation of the initial ', relevant_column_name, ' estimate'], 'Interpreter','latex');
     if center_graphs == 1
         set(gca, 'XLim', [-2.5, 2.5], 'XTick', -2.5:0.5:2.5);
     end
@@ -142,7 +142,7 @@ initial_estimates = initial_estimates(:, {'param_name', 'param_name_tex', 'avera
 initial_estimates.Properties.VariableNames = {'param_name' 'param_name_tex' 'average_control' 'std'};
 
 params_to_recalibrate = {'ctou', 'clandaw', 'cg', 'curvp', 'curvw'};
-params_to_recalibrate_tex = {'$\delta$', '$\lambda_w$', '$\frac{\bar g}{\bar y}$', '$\varepsilon_p$', '$\varepsilon_w$'};
+params_to_recalibrate_tex = {'$\delta$', '$\lambda_w$', '$g_y$', '$\varepsilon_p$', '$\varepsilon_w$'};
 
 for param_num = 1:length(params_to_recalibrate)
     recalibrated_param = params_to_recalibrate{param_num};
@@ -178,7 +178,7 @@ for param_num = 1:length(params_to_recalibrate)
     ax.TickLabelInterpreter = 'latex';
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'Interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
-    xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (\%)'], 'Interpreter','latex');
+    xlabel(['in \% of the estimated ', relevant_column_name, ' in the control case'], 'Interpreter','latex');
     if center_graphs == 1
         set(gca, 'XLim', [-1.5, 1.5], 'XTick', -1.5:0.5:1.5);
     end
@@ -196,7 +196,7 @@ for param_num = 1:length(params_to_recalibrate)
     ax.TickLabelInterpreter = 'latex';
     title(['Effect of a ', num2str(percentage_change_magnitude * 100), '\% change in the fixed value of ', recalibrated_param_tex, ' on the estimated parameters'], 'Interpreter','latex');
     legend({legend_increase, legend_decrease}, 'Interpreter','latex')
-    xlabel(['Change in the ', relevant_column_name, ' of the estimated parameter (expressed in standard deviations)'], 'Interpreter','latex');
+    xlabel(['in standard deviation of the initial ', relevant_column_name, ' estimate'], 'Interpreter','latex');
     if center_graphs == 1
         set(gca, 'XLim', [-0.05, 0.05], 'XTick', -0.05:0.01:0.05);
     end
@@ -232,8 +232,8 @@ barh(categorical(initial_estimates.param_name_tex), [initial_estimates.percentag
 
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
-title(['Estimation bias using the control model '], 'Interpreter','latex');
-xlabel('in \% of the true value ', 'Interpreter', 'latex');
+title(['Estimation bias using the control model'], 'Interpreter','latex');
+xlabel(['in \% of the estimated ', relevant_column_name, ' in the initial estimation'], 'Interpreter', 'latex');
 if center_graphs == 1
     set(gca, 'XLim', [-65, 65], 'XTick', -65:5:65);
 end
@@ -247,8 +247,8 @@ barh(categorical(initial_estimates.param_name_tex), [initial_estimates.std_devia
 
 ax = gca;
 ax.TickLabelInterpreter = 'latex';
-title(['Estimation bias using the control model '], 'Interpreter','latex');
-xlabel('in standard deviations of the estimate', 'Interpreter', 'latex');
+title(['Estimation bias using the control model'], 'Interpreter','latex');
+xlabel(['in standard deviation of the initial ', relevant_column_name, ' estimate'], 'Interpreter', 'latex');
 if center_graphs == 1
     set(gca, 'XLim', [-2.5, 2.5], 'XTick', -2.5:0.5:2.5);
 end
