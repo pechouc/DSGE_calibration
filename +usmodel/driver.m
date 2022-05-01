@@ -288,7 +288,7 @@ M_.param_names(38) = {'ctrend'};
 M_.param_names_tex(38) = {'{\bar{\gamma}}'};
 M_.param_names_long(38) = {'Trend growth rate'};
 M_.param_names(39) = {'cg'};
-M_.param_names_tex(39) = {'{\frac{\bar g}{\bar y}}'};
+M_.param_names_tex(39) = {'{g_y}}'};
 M_.param_names_long(39) = {'Exogenous spending-GDP ratio'};
 M_.param_partitions = struct();
 M_.exo_det_nbr = 0;
@@ -614,9 +614,9 @@ estim_params_.param_vals = [estim_params_.param_vals; 9, 0.24, 0.01, 1.0, 3, 0.3
 write_latex_definitions;
 write_latex_prior_table;
 if exist('estimation_method_short') == 0
-estimation_method_short = 'MLE';
+estimation_method_short = 'noMH';
 end
-if strcmp(estimation_method_short, 'MLE') == 1
+if strcmp(estimation_method_short, 'noMH') == 1
 options_.lik_init = 2;
 options_.mh_replic = 0;
 options_.nograph = true;
@@ -645,7 +645,7 @@ options_.order = 1;
 var_list_ = {};
 oo_recursive_=dynare_estimation(var_list_);
 else
-error('Estimation method can only be "MLE" for maximum likelihood or "MH" for Metropolis-Hastings.')
+error('Estimation method can only be "noMH" for no Metropolis-Hastings replication or "MH" for Metropolis-Hastings.')
 end
 N = 100; 
 for i = 1:N;
