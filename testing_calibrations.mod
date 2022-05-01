@@ -231,10 +231,10 @@ for i = 1:I;
     eval(['save temp.mat dy dc dinve labobs pinfobs dw robs']);
     
     if exist('estimation_method_short') == 0
-        estimation_method_short = 'MLE';
+        estimation_method_short = 'noMH';
     end
     
-    if strcmp(estimation_method_short, 'MLE') == 1
+    if strcmp(estimation_method_short, 'noMH') == 1
         estimation(
             datafile=temp, 
             first_obs=71, 
@@ -321,7 +321,7 @@ for i = 1:I;
         end
     
     else
-        error('Estimation method can only be "MLE" for maximum likelihood or "MH" for Metropolis-Hastings.')
+        error('Estimation method can only be "noMH" for no Metropolis-Hastings replications or "MH" for Metropolis-Hastings.')
     end
 
 end;

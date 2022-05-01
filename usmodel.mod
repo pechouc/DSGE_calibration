@@ -305,10 +305,10 @@ write_latex_definitions;
 write_latex_prior_table;
 
 if exist('estimation_method_short') == 0
-    estimation_method_short = 'MLE';
+    estimation_method_short = 'noMH';
 end
 
-if strcmp(estimation_method_short, 'MLE') == 1
+if strcmp(estimation_method_short, 'noMH') == 1
     estimation(datafile=usmodel_data, first_obs=71, presample=4,lik_init=2, mh_replic=0, nograph);
 
 elseif strcmp(estimation_method_short, 'MH') == 1
@@ -330,7 +330,7 @@ elseif strcmp(estimation_method_short, 'MH') == 1
     );
 
 else
-    error('Estimation method can only be "MLE" for maximum likelihood or "MH" for Metropolis-Hastings.')
+    error('Estimation method can only be "noMH" for no Metropolis-Hastings replication or "MH" for Metropolis-Hastings.')
 end
 
 N = 100; 

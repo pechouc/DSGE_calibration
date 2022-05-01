@@ -3,14 +3,14 @@
 %%% ------------------------------------------------------------------- %%%
 
 if exist("estimation_method_short") == 0
-    prompt = "Which estimation method was selected? (answer by 'MLE' or 'MH')";
+    prompt = "Which estimation method was selected? (answer by 'noMH' or 'MH')";
     estimation_method_short = input(prompt);
 end
 
 initial_file_name = ['initial_param_estimation_', estimation_method_short, '.xlsx'];
 output_file_name = ['testing_calibrations_params_', estimation_method_short, '.xlsx'];
 
-if strcmp(estimation_method_short, 'MLE') == 1
+if strcmp(estimation_method_short, 'noMH') == 1
     relevant_column_name = 'mode';
     std_column_name = 'std_at_mode';
 else
@@ -77,7 +77,7 @@ for param_num = 1:length(params_to_recalibrate)
     merged_table.Properties.VariableNames = {'param_name' 'param_name_tex' 'average_plus' relevant_column_name 'average_minus' 'std'};
 
     % We compute percentage changes between the estimates obtained before and after the calibration error
-    if strcmp(estimation_method_short, 'MLE') == 1
+    if strcmp(estimation_method_short, 'noMH') == 1
         merged_table.diff_plus = merged_table.average_plus - merged_table.mode;
         merged_table.percentage_change_plus = (merged_table.diff_plus ./ merged_table.mode) * 100;
 
