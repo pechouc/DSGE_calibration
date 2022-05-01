@@ -93,7 +93,7 @@ parameters
     crhopinf       ${\rho_p}$                  (long_name='Persistence of the price markup shock')
     crhow          ${\rho_w}$                  (long_name='Persistence of the wage markup shock')
     ctrend         ${\bar{\gamma}}$            (long_name='Trend growth rate')
-    cg             ${g_y}}$   (long_name='Exogenous spending-GDP ratio')
+    cg             ${g_y}}$                    (long_name='Exogenous spending-GDP ratio')
 ;
 
 // fixed parameters
