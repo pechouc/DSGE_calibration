@@ -5,7 +5,7 @@
 prompt = 'On how many simulated datasets do you wish to run the estimation?';
 I = input(prompt);
 
-prompt = "Which method do you wish to use? (answer by 'MLE' or 'MH' with these quotation marks)";
+prompt = "Which method do you wish to use? (answer by 'noMH' or 'MH' with these quotation marks)";
 estimation_method_short = input(prompt);
 
 prompt = "Choose the magnitude of the percentage change (like 0.01 for 1% changes):";

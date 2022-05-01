@@ -8,7 +8,7 @@
 % the model once without any calibration error
 
 if exist("estimation_method_short") == 0
-    estimation_method_short = 'MLE';
+    estimation_method_short = 'noMH';
 end
 
 if exist("percentage_change_magnitude") == 0

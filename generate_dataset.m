@@ -15,12 +15,12 @@ dynare usmodel
 % --- In the following, we get and save the posterior modes and standard deviations of the parameters
 
 if exist("estimation_method_short") == 0
-    estimation_method_short = 'MLE'
+    estimation_method_short = 'noMH'
 end
 
 initial_output_file_name = ['initial_param_estimation_', estimation_method_short, '.xlsx'];
 
-if strcmp(estimation_method_short, 'MLE')
+if strcmp(estimation_method_short, 'noMH')
     % For the estimated parameters - Modes and standard deviations
     temp = oo_.posterior_mode.parameters; % Getting the structure with posterior modes and names
     temp(:, 2) = oo_.posterior_std_at_mode.parameters; % Adding standard deviations
